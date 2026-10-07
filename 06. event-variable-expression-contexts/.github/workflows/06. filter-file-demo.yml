@@ -22,10 +22,10 @@ on:
 
     
 jobs:
-    runner-info-job:
+    validation-job:
         runs-on: ubuntu-latest
         steps:
-          - name: print runner Details
+          - name: print workflow Details
             run: |
               echo "Workflow triggered sucessfully"
               echo "Event type: $GITHUB_EVENT_NAME"

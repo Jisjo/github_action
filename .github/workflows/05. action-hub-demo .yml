@@ -1,7 +1,6 @@
 name: 04 - flask CI Workflow
 
 on:
-  push:
   workflow_dispatch:
 
 
