@@ -1,0 +1,33 @@
+name: "06. understanding the filter and event type"
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "develop"
+      - "feature/*"
+    paths:
+      - "app/**"
+      - "docker/**"
+      - ".github/workflows/**"
+  
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - closed
+      - reopened
+      - ready_for_review
+    branches:
+      - main
+
+    
+jobs:
+    validation-job:
+        runs-on: ubuntu-latest
+        steps:
+          - name: print workflow Details
+            run: |
+              echo "Workflow triggered sucessfully"
+              echo "Event type: $GITHUB_EVENT_NAME"
+              echo "Branch: GITHUB_REF_NAME"
+              echo "Owner Name: GITHUB_REPOSITORY_OWNER"
