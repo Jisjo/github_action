@@ -9,6 +9,7 @@ on:
       - "app/**"
       - "docker/**"
       - ".github/workflows/**"
+      - "ProjectFiles/**"
   
   pull_request:
     types:
