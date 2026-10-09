@@ -13,7 +13,7 @@ env:
 
 jobs:
     demo-job:
-        run-on:ubuntu-latest
+        runs-on: ubuntu-latest
 
         steps:
             - name: Print variable context and expression
@@ -28,7 +28,7 @@ jobs:
 
                 echo "=============CUSTOM VARIABLES==============="
                 echo "Application Name: $APPLICATION_NAME"
-                echo "Deployment env: DEPLOYMENT_ENV"
+                echo "Deployment env: $DEPLOYMENT_ENV"
                 echo "AWS Region: $AWS_REGION"
 
                 echo ""
@@ -41,14 +41,14 @@ jobs:
 
                 echo "========EXPRESSION EVALUATION================="
                 echo "Is Main Branch: ${{ github.ref == 'refs/heads/main'}}"
-                echo "IS feature Branch: ${{ startwith(github.ref_name, 'feature/')}}"
+                echo "IS feature Branch: ${{ startsWith(github.ref_name, 'feature/')}}"
             
             - name: Demostrate Feature Branch Condition
-              if: ${{ startwith(github.ref_name, 'feature/')}}"
+              if: ${{ startsWith(github.ref_name, 'feature/')}}
               run: |
                 echo "Feature Branch detected sucessfully"
 
             - name: Demostrate Main Branch Condition
-              if: ${{ github.ref == 'refs/heads/main'}}"
+              if: ${{ github.ref == 'refs/heads/main'}}
               run: |
                 echo "Main Branch deployment login detected"
