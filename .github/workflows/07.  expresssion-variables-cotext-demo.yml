@@ -1,0 +1,54 @@
+name: 07.  expresssion-variables-cotext-demo
+
+on:
+    push:
+        branches:
+            - main
+            - feature/*
+
+env:
+    APPLICATION_NAME: payment-service
+    DEPLOYMENT_ENV: prod
+    AWS_REGION: ap-south-1
+
+jobs:
+    demo-job:
+        run-on:ubuntu-latest
+
+        steps:
+            - name: Print variable context and expression
+              run: |
+                echo "============DEFAULT VARIABLE==============="
+                echo "Event Name: $GITHUB_EVENT_NAME"
+                echo "Branch name: $GITHUB_REF_NAME"
+                echo "Commit SHA: $GITHUB_SHA"
+                echo "Runner OS: $RUNNER_OS"
+
+                echo ""
+
+                echo "=============CUSTOM VARIABLES==============="
+                echo "Application Name: $APPLICATION_NAME"
+                echo "Deployment env: DEPLOYMENT_ENV"
+                echo "AWS Region: $AWS_REGION"
+
+                echo ""
+
+                echo "===========CONTEXT VS VARIABLES=============="
+                echo "Context Ref: ${{ github.ref}}"
+                echo "Variable Ref: $GITHUB_REF"
+
+                echo ""
+
+                echo "========EXPRESSION EVALUATION================="
+                echo "Is Main Branch: ${{ github.ref == 'refs/heads/main'}}"
+                echo "IS feature Branch: ${{ startwith(github.ref_name, 'feature/')}}"
+            
+            - name: Demostrate Feature Branch Condition
+              if: ${{ startwith(github.ref_name, 'feature/')}}"
+              run: |
+                echo "Feature Branch detected sucessfully"
+
+            - name: Demostrate Main Branch Condition
+              if: ${{ github.ref == 'refs/heads/main'}}"
+              run: |
+                echo "Main Branch deployment login detected"
